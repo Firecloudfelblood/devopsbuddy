@@ -19,14 +19,15 @@ public class ContactController {
 
     @Autowired
     private EmailService emailService;
-    @RequestMapping(value ="/contact", method= RequestMethod.GET)
+
+    @RequestMapping(value ="/contact", method = RequestMethod.GET)
     public String contactGet(ModelMap model){
         FeedbackPojo feedbackPojo = new FeedbackPojo();
         model.addAttribute(ContactController.FEEDBACK_MODEL_KEY, feedbackPojo);
         return ContactController.CONTACT_US_VIEW_NAME;
     }
 
-    @RequestMapping(value ="/contact", method= RequestMethod.POST)
+    @RequestMapping(value ="/contact", method = RequestMethod.POST)
     public String contactPost(@ModelAttribute(FEEDBACK_MODEL_KEY)FeedbackPojo feedback){
         LOG.debug("Feedback from the pojo content: {}", feedback);
         emailService.sendFeedbackEmail(feedback);
